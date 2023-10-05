@@ -1,0 +1,18 @@
+{
+  "labels": {
+    "settings": {
+      "title": "Definições",
+      "subtitle": "Ajusta a tua Aplicação",
+      "debt_limit": "Limite de Dividas",
+      "days_limit": "Limite de Dias",
+      "currency": "Alterar Moeda",
+      "theme": "Alterar Tema",
+      "language": "Alterar Idioma"
+    }
+  },
+  "buttons": {
+    "settings": {
+      "clear": "Limpar Dados"
+    }
+  }
+}
