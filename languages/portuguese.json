@@ -12,7 +12,11 @@
   },
   "buttons": {
     "settings": {
-      "clear": "Limpar Dados"
+      "resetData": "Limpar Dados"
     }
+  },
+  "theme": {
+    "light": "Modo Claro",
+    "dark": "Modo Escuro"
   }
 }
