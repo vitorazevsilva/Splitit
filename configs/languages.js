@@ -1,5 +1,5 @@
 import Portuguese from "../languages/portuguese.json";
-//import English from "../languages/english.json";
+import English from "../languages/english.json";
 
 export default {
   pt: {
@@ -8,6 +8,6 @@ export default {
   },
   en: {
     name: "English",
-    filename: {},
+    filename: English,
   },
 };

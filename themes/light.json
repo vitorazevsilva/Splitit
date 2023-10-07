@@ -7,6 +7,8 @@
   "secondaryBackground": { "backgroundColor": "#fff" },
   "primaryText": { "color": "#14181b" },
   "secondaryText": { "color": "#fff" },
+  "tertiaryText": { "color": "#000" },
   "success": { "backgroundColor": "#249689", "color": "#fff" },
-  "error": { "backgroundColor": "#ff5936", "color": "#fff" }
+  "error": { "backgroundColor": "#ff5936", "color": "#fff" },
+  "info": { "color": "#fff" }
 }

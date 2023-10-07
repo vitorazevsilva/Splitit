@@ -1,6 +1,8 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Languages from "../configs/languages";
 
+let languageConfig = undefined;
+
 /**
  * Retrieves the list of available languages.
  * @function getAllLanguages
@@ -10,7 +12,7 @@ const getAllLanguages = () => {
   const nameList = [];
   for (const language in Languages) {
     if (Languages.hasOwnProperty(language)) {
-      nameList.push(Languages[language].name);
+      nameList.push({ name: Languages[language].name, code: language });
     }
   }
   return nameList;
@@ -24,7 +26,7 @@ const getAllLanguages = () => {
  * @returns {Promise<Object>} The language configuration object.
  */
 const Language = async () => {
-  let languageConfig = await AsyncStorage.getItem("languageConfig");
+  languageConfig = await AsyncStorage.getItem("languageConfig");
   if (languageConfig === null) {
     const Locales = await getLocales();
     const userLanguageCode = Locales[0].languageCode;
@@ -39,4 +41,8 @@ const Language = async () => {
   return Languages[languageConfig].filename;
 };
 
-export { Languages, Language, getAllLanguages };
+const getLanguage = () => {
+  return languageConfig;
+};
+
+export { Languages, Language, getAllLanguages, getLanguage };

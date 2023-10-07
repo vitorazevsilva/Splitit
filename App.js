@@ -3,7 +3,7 @@ import { useEffect, useCallback, useState } from "react";
 import { View } from "react-native";
 import { useFonts } from "expo-font";
 import { MainStyle } from "./stylesheets";
-import { startApp } from "./utils/verification";
+import { getConfigs } from "./utils/configs";
 import { Language } from "./utils/language";
 import { Theme } from "./utils/theme";
 import Main from "./pages/Main";
@@ -11,22 +11,30 @@ import Main from "./pages/Main";
 SplashScreen.preventAutoHideAsync();
 
 export default App = () => {
-  const [ThemeStyle, setTheme] = useState(undefined);
-  const [LanguageText, setLanguageText] = useState(undefined);
+  const [ThemeStyle, setThemeStyle] = useState();
+  const [LanguageText, setLanguageText] = useState();
+  const [configValues, setConfigValues] = useState();
+  const [configChanged, setConfigChanged] = useState(true);
 
   useEffect(() => {
-    startApp();
-    Language().then((data) => {
-      setLanguageText(data);
-    });
-    Theme().then((data) => {
-      setTheme(data);
-    });
-  }, []);
+    if (configChanged) {
+      getConfigs().then((data) => {
+        setConfigValues(data);
+      });
+      Language().then((data) => {
+        setLanguageText(data);
+      });
+      Theme().then((data) => {
+        setThemeStyle(data);
+      });
+      setConfigChanged(false);
+    }
+  }, [configChanged]);
 
   const [fontsLoaded] = useFonts({
     "Pacifico-Regular": require("./fonts/Pacifico/Pacifico-Regular.ttf"),
     "CaveatBrush-Regular": require("./fonts/CaveatBrush/CaveatBrush-Regular.ttf"),
+    "Dangrek-Regular": require("./fonts/Dangrek/Dangrek-Regular.ttf"),
   });
 
   const onLayoutRootView = useCallback(async () => {
@@ -45,7 +53,10 @@ export default App = () => {
         style={[MainStyle, ThemeStyle.principal]}
         onLayout={onLayoutRootView}
       >
-        <Main Utils={[ThemeStyle, LanguageText]} />
+        <Main
+          Gets={[ThemeStyle, LanguageText, configValues]}
+          Sets={[setConfigChanged]}
+        />
       </View>
     </>
   );

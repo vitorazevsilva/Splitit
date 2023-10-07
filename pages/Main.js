@@ -1,20 +1,29 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import { useState } from "react";
-import { FontAwesome5, Ionicons, Octicons } from "@expo/vector-icons";
+import { FontAwesome5, Ionicons, Foundation } from "@expo/vector-icons";
 import { HeaderStyle, NavBarStyle, RouterStyle } from "../stylesheets";
-export default ({ Utils }) => {
-  const [ThemeStyle] = Utils;
-  const [Page, setPage] = useState("home");
+import Settings from "./Settings";
+
+export default ({ Gets, Sets }) => {
+  const [ThemeStyle] = Gets;
+  const [Page, setPage] = useState("settings");
+
+  const isPage = (page) => {
+    return Page === page;
+  };
+
   return (
     <>
-      <Header Utils={Utils} Page={Page} />
-      <View style={[RouterStyle, ThemeStyle.primaryBackground]}></View>
-      <NavBar Utils={Utils} Page={[Page, setPage]} />
+      <Header Gets={Gets} Page={[Page, setPage]} />
+      <View style={[RouterStyle, ThemeStyle.primaryBackground]}>
+        {isPage("settings") && <Settings Gets={Gets} Sets={Sets} />}
+      </View>
+      <NavBar Gets={Gets} Page={[Page, setPage]} />
     </>
   );
 };
 
-const Header = ({ Utils: [ThemeStyle, LanguageText], Page }) => {
+const Header = ({ Gets: [ThemeStyle, LanguageText], Page: [Page] }) => {
   return (
     <>
       <Text style={[HeaderStyle.title, ThemeStyle.secondaryText]}>
@@ -27,9 +36,9 @@ const Header = ({ Utils: [ThemeStyle, LanguageText], Page }) => {
   );
 };
 
-const NavBar = ({ Utils: [ThemeStyle], Page: [Page, setPage] }) => {
+const NavBar = ({ Gets: [ThemeStyle], Page: [Page, setPage] }) => {
   const getStyleForPage = (page, view = true) => {
-    if (Page === page) return view ? ThemeStyle.principal : { color: "#fff" };
+    if (Page === page) return view ? ThemeStyle.principal : ThemeStyle.info;
     else return view ? ThemeStyle.secondaryBackground : ThemeStyle.primary;
   };
 
@@ -48,7 +57,7 @@ const NavBar = ({ Utils: [ThemeStyle], Page: [Page, setPage] }) => {
           ]}
           onPress={() => handlePageChange("home")}
         >
-          <Octicons
+          <Foundation
             name="home"
             style={[getStyleForPage("home", false)]}
             size={45}

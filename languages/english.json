@@ -1,0 +1,22 @@
+{
+  "labels": {
+    "settings": {
+      "title": "Settings",
+      "subtitle": "Fine-tune your App",
+      "debt_limit": "Debt Limit",
+      "days_limit": "Days Limit",
+      "currency": "Change Currency",
+      "theme": "Change Theme",
+      "language": "Change Language"
+    }
+  },
+  "buttons": {
+    "settings": {
+      "resetData": "Clear Data"
+    }
+  },
+  "theme": {
+    "light": "Light Mode",
+    "dark": "Dark Mode"
+  }
+}

@@ -14,7 +14,7 @@ const getAllThemes = async () => {
   const LanguageText = await Language();
   for (const theme in Themes) {
     if (Themes.hasOwnProperty(theme)) {
-      themeList.push(LanguageText.theme[theme]);
+      themeList.push(LanguageText.theme[theme] || "Trans. not avail.");
     }
   }
   return themeList;

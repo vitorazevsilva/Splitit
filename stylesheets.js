@@ -45,4 +45,32 @@ const RouterStyle = StyleSheet.create({
   borderTopLeftRadius: 25,
 });
 
-export { MainStyle, HeaderStyle, NavBarStyle, RouterStyle };
+const SettingsStyle = StyleSheet.create({
+  containerRow: {
+    flexDirection: "row",
+    width: "100%",
+  },
+  containerColumn: {
+    flexDirection: "column",
+    width: "100%",
+    paddingRight: 15,
+  },
+  inputGroup: {
+    flexDirection: "column",
+    paddingLeft: 15,
+  },
+  label: {
+    paddingTop: 25,
+    fontSize: 16,
+    fontFamily: "Dangrek-Regular",
+    fontWeight: 500,
+  },
+  input: {
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    fontSize: 14,
+    width: "100%",
+    borderRadius: 8,
+  },
+});
+export { MainStyle, HeaderStyle, NavBarStyle, RouterStyle, SettingsStyle };
