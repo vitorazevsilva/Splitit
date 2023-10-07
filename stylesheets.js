@@ -35,4 +35,14 @@ const NavBarStyle = StyleSheet.create({
   },
 });
 
-export { MainStyle, HeaderStyle, NavBarStyle };
+const RouterStyle = StyleSheet.create({
+  width: "100%",
+  position: "relative",
+  bottom: 0,
+  height: "100%",
+  marginTop: 15,
+  borderTopRightRadius: 25,
+  borderTopLeftRadius: 25,
+});
+
+export { MainStyle, HeaderStyle, NavBarStyle, RouterStyle };

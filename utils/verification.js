@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getLocales } from "expo-localization";
-import Currency from "../configs/currency.json";
+import Currency from "../configs/currency";
 
 /**
  * Initializes the app by fetching the device locales and retrieving configuration values from AsyncStorage.

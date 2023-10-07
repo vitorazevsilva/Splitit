@@ -1,18 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useColorScheme } from "react-native";
 import { Language } from "./language";
-
-import light from "../themes/light";
-import dark from "../themes/dark";
-
-/**
- * Object containing light and dark theme configurations.
- * @typedef {Object} Themes
- * @property {Object} light - The light theme configuration.
- * @property {Object} dark - The dark theme configuration.
- */
-
-const Themes = { light, dark };
+import Themes from "../configs/themes";
 
 /**
  * Retrieves the list of available themes.

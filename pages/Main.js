@@ -1,13 +1,14 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import { useState } from "react";
 import { FontAwesome5, Ionicons, Octicons } from "@expo/vector-icons";
-import { HeaderStyle, NavBarStyle } from "../stylesheets";
+import { HeaderStyle, NavBarStyle, RouterStyle } from "../stylesheets";
 export default ({ Utils }) => {
+  const [ThemeStyle] = Utils;
   const [Page, setPage] = useState("home");
   return (
     <>
       <Header Utils={Utils} Page={Page} />
-      <></>
+      <View style={[RouterStyle, ThemeStyle.primaryBackground]}></View>
       <NavBar Utils={Utils} Page={[Page, setPage]} />
     </>
   );

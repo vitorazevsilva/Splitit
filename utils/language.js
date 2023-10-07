@@ -1,25 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
-import Portuguese from "../languages/portuguese.json";
-//import English from "../languages/english.json";
-
-/**
- * Object containing supported language configurations.
- * @typedef {Object} Languages
- * @property {Object} pt - The Portuguese language configuration.
- * @property {Object} en - The English language configuration.
- */
-
-const Languages = {
-  pt: {
-    name: "Portugues",
-    filename: Portuguese,
-  },
-  en: {
-    name: "English",
-    filename: {},
-  },
-};
+import Languages from "../configs/languages";
 
 /**
  * Retrieves the list of available languages.
