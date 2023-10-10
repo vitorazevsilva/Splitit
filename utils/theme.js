@@ -3,18 +3,23 @@ import { useColorScheme } from "react-native";
 import { Language } from "./language";
 import Themes from "../configs/themes";
 
+let themeConfig = undefined;
+
 /**
  * Retrieves the list of available themes.
  * @async
  * @function getAllThemes
- * @returns {Promise<string[]>} The list of available themes.
+ * @returns {Promise<string{}>} The list of available themes.
  */
 const getAllThemes = async () => {
   const themeList = [];
   const LanguageText = await Language();
   for (const theme in Themes) {
     if (Themes.hasOwnProperty(theme)) {
-      themeList.push(LanguageText.theme[theme] || "Trans. not avail.");
+      themeList.push({
+        name: LanguageText.theme[theme] || "Trans. not avail.",
+        code: theme,
+      });
     }
   }
   return themeList;
@@ -28,7 +33,7 @@ const getAllThemes = async () => {
  * @returns {Promise<Object>} The current theme configuration.
  */
 const Theme = async () => {
-  let themeConfig = await AsyncStorage.getItem("themeConfig");
+  themeConfig = await AsyncStorage.getItem("themeConfig");
   if (themeConfig === null) {
     let colorScheme = useColorScheme();
     if (colorScheme === "dark") {
@@ -42,4 +47,8 @@ const Theme = async () => {
   return Themes[themeConfig];
 };
 
-export { Themes, Theme, getAllThemes };
+const getTheme = () => {
+  return themeConfig;
+};
+
+export { Themes, Theme, getAllThemes, getTheme };

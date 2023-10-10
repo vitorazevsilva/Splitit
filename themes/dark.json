@@ -1,1 +1,14 @@
-{}
+{
+  "principal": { "color": "#225350", "backgroundColor": "#225350" },
+  "primary": { "color": "#fff" },
+  "secondary": { "color": "#39d2c0" },
+  "alternate": { "color": "#262d34" },
+  "primaryBackground": { "backgroundColor": "#1d2428" },
+  "secondaryBackground": { "backgroundColor": "#14181b" },
+  "primaryText": { "color": "#fff" },
+  "secondaryText": { "color": "#95a1ac" },
+  "tertiaryText": { "color": "#1d2428" },
+  "success": { "backgroundColor": "#249689", "color": "#fff" },
+  "error": { "backgroundColor": "#ff5936", "color": "#fff" },
+  "info": { "color": "#fff" }
+}

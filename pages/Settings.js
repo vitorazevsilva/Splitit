@@ -4,6 +4,7 @@ import { Picker } from "@react-native-picker/picker";
 import { SettingsStyle } from "../stylesheets";
 import { setConfig } from "../utils/configs";
 import { getAllLanguages, getLanguage } from "../utils/language";
+import { getAllThemes, getTheme } from "../utils/theme";
 
 export default ({
   Gets: [ThemeStyle, LanguageText, configValues],
@@ -11,14 +12,19 @@ export default ({
 }) => {
   const [debtLimit, setDebtLimit] = useState();
   const [daysLimit, setDaysLimit] = useState();
-  const [currencyConfig, setCurrencyConfig] = useState();
-  const [themeConfig, setThemeConfig] = useState();
-  const [languageConfig, setLanguageConfig] = useState();
+  const [allThemes, setAllThemes] = useState();
 
   useEffect(() => {
     setDebtLimit(configValues?.debtLimitConfig);
     setDaysLimit(configValues?.daysLimitConfig);
   }, [configValues?.debtLimitConfig, configValues?.daysLimitConfig]);
+
+  useEffect(() => {
+    if (allThemes === undefined || allThemes.length < 1)
+      getAllThemes().then((themes) => {
+        setAllThemes(themes);
+      });
+  }, [allThemes]);
 
   return (
     <>
@@ -36,7 +42,7 @@ export default ({
             style={[
               SettingsStyle.input,
               ThemeStyle.secondaryBackground,
-              ThemeStyle.tertiaryText,
+              ThemeStyle.primaryText,
             ]}
             onChangeText={(value) => setDebtLimit(value)}
             value={debtLimit}
@@ -60,7 +66,7 @@ export default ({
             style={[
               SettingsStyle.input,
               ThemeStyle.secondaryBackground,
-              ThemeStyle.tertiaryText,
+              ThemeStyle.primaryText,
             ]}
             onChangeText={(value) => setDaysLimit(value)}
             value={daysLimit}
@@ -76,23 +82,36 @@ export default ({
         <InputGroupColumn
           Gets={[ThemeStyle]}
           Sets={[setConfigChanged]}
-          labelText={LanguageText.labels.settings.currency}
+          labelText={LanguageText.labels?.settings?.currency}
           configName="currencyConfig"
           selectedValue={"€"}
         ></InputGroupColumn>
+        {allThemes !== undefined ? (
+          <InputGroupColumn
+            Gets={[ThemeStyle]}
+            Sets={[setConfigChanged]}
+            labelText={LanguageText.labels?.settings?.theme}
+            configName="themeConfig"
+            selectedValue={getTheme()}
+          >
+            {allThemes.map((theme) => (
+              <Picker.Item
+                key={theme.code}
+                label={theme.name}
+                value={theme.code}
+              />
+            ))}
+          </InputGroupColumn>
+        ) : (
+          <></>
+        )}
         <InputGroupColumn
           Gets={[ThemeStyle]}
           Sets={[setConfigChanged]}
-          labelText={LanguageText.labels.settings.theme}
-          configName="themeConfig"
-          selectedValue={"light"}
-        ></InputGroupColumn>
-        <InputGroupColumn
-          Gets={[ThemeStyle]}
-          Sets={[setConfigChanged]}
-          labelText={LanguageText.labels.settings.language}
+          labelText={LanguageText.labels?.settings?.language}
           configName="languageConfig"
           selectedValue={getLanguage()}
+          reloadThemes={setAllThemes}
         >
           {getAllLanguages().map((language) => (
             <Picker.Item
@@ -114,8 +133,16 @@ const InputGroupColumn = ({
   labelText,
   configName,
   selectedValue,
+  reloadThemes = undefined,
 }) => {
   const [selected, setSelected] = useState(selectedValue);
+  useEffect(() => {
+    console.log(
+      "%cSettings.js line:139 selectedValue",
+      "color: #007acc;",
+      selectedValue
+    );
+  }, []);
   return (
     <>
       <View style={[SettingsStyle.inputGroup]}>
@@ -133,11 +160,19 @@ const InputGroupColumn = ({
           <Picker
             selectedValue={selected}
             onValueChange={(itemValue, itemIndex) => {
-              setSelected(itemValue);
-              setConfig(configName, itemValue).then(setConfigChanged(true));
-              console.log(configName, itemValue);
+              if (itemValue !== null) {
+                setSelected(itemValue);
+                setConfig(configName, itemValue).then(setConfigChanged(true));
+                if (configName === "languageConfig") reloadThemes([]);
+              }
+
+              console.log(
+                "%cSettings.js line:160 itemValue",
+                "color: #007acc;",
+                itemValue
+              );
             }}
-            style={[SettingsStyle.input, ThemeStyle.tertiaryText]}
+            style={[SettingsStyle.input, ThemeStyle.primaryText]}
           >
             {children}
           </Picker>

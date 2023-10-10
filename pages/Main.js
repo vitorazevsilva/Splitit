@@ -26,10 +26,10 @@ export default ({ Gets, Sets }) => {
 const Header = ({ Gets: [ThemeStyle, LanguageText], Page: [Page] }) => {
   return (
     <>
-      <Text style={[HeaderStyle.title, ThemeStyle.secondaryText]}>
+      <Text style={[HeaderStyle.title, ThemeStyle.info]}>
         {LanguageText.labels[Page]?.title || "Trans. not avail."}
       </Text>
-      <Text style={[HeaderStyle.subtitle, ThemeStyle.secondaryText]}>
+      <Text style={[HeaderStyle.subtitle, ThemeStyle.info]}>
         {LanguageText.labels[Page]?.subtitle || "Trans. not avail."}
       </Text>
     </>
