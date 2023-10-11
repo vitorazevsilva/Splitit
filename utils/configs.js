@@ -46,6 +46,14 @@ const getConfigs = async () => {
   };
 };
 
+const getAllCurrency = () => {
+  const nameList = [];
+  for (const currency in Currency) {
+    nameList.push({ name: Currency[currency], code: currency });
+  }
+  return nameList;
+};
+
 /**
  * Sets the configuration value in AsyncStorage if the provided key is valid.
  * @param {string} key - The key of the configuration value.
@@ -64,4 +72,4 @@ const setConfig = async (key, value) => {
   else return false;
 };
 
-export { getConfigs, setConfig };
+export { getConfigs, setConfig, getAllCurrency };

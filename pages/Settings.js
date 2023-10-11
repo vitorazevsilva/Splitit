@@ -2,7 +2,7 @@ import { Text, TextInput, View } from "react-native";
 import { useEffect, useState } from "react";
 import { Picker } from "@react-native-picker/picker";
 import { SettingsStyle } from "../stylesheets";
-import { setConfig } from "../utils/configs";
+import { setConfig, getAllCurrency } from "../utils/configs";
 import { getAllLanguages, getLanguage } from "../utils/language";
 import { getAllThemes, getTheme } from "../utils/theme";
 
@@ -84,8 +84,16 @@ export default ({
           Sets={[setConfigChanged]}
           labelText={LanguageText.labels?.settings?.currency}
           configName="currencyConfig"
-          selectedValue={"€"}
-        ></InputGroupColumn>
+          selectedValue={configValues?.currencyConfig}
+        >
+          {getAllCurrency().map((currency) => (
+            <Picker.Item
+              key={currency.code}
+              label={currency.name}
+              value={currency.code}
+            />
+          ))}
+        </InputGroupColumn>
         {allThemes !== undefined ? (
           <InputGroupColumn
             Gets={[ThemeStyle]}
@@ -160,7 +168,7 @@ const InputGroupColumn = ({
           <Picker
             selectedValue={selected}
             onValueChange={(itemValue, itemIndex) => {
-              if (itemValue !== null) {
+              if (itemValue !== null || selectedValue !== undefined) {
                 setSelected(itemValue);
                 setConfig(configName, itemValue).then(setConfigChanged(true));
                 if (configName === "languageConfig") reloadThemes([]);
