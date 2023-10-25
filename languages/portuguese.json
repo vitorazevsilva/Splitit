@@ -8,6 +8,10 @@
       "currency": "Alterar Moeda",
       "theme": "Alterar Tema",
       "language": "Alterar Idioma"
+    },
+    "friends": {
+      "title": "Amigos",
+      "subtitle": "Organiza os teus amigos"
     }
   },
   "buttons": {

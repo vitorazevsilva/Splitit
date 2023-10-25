@@ -144,13 +144,7 @@ const InputGroupColumn = ({
   reloadThemes = undefined,
 }) => {
   const [selected, setSelected] = useState(selectedValue);
-  useEffect(() => {
-    console.log(
-      "%cSettings.js line:139 selectedValue",
-      "color: #007acc;",
-      selectedValue
-    );
-  }, []);
+
   return (
     <>
       <View style={[SettingsStyle.inputGroup]}>
@@ -173,12 +167,6 @@ const InputGroupColumn = ({
                 setConfig(configName, itemValue).then(setConfigChanged(true));
                 if (configName === "languageConfig") reloadThemes([]);
               }
-
-              console.log(
-                "%cSettings.js line:160 itemValue",
-                "color: #007acc;",
-                itemValue
-              );
             }}
             style={[SettingsStyle.input, ThemeStyle.primaryText]}
           >

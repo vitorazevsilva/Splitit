@@ -32,6 +32,11 @@ const Language = async () => {
     const userLanguageCode = Locales[0].languageCode;
     if (Language[userLanguageCode]) {
       languageConfig = userLanguageCode;
+      console.log(
+        "%clanguage.js line:35 languageConfig",
+        "color: #007acc;",
+        languageConfig
+      );
       await AsyncStorage.setItem("languageConfig", languageConfig);
     } else {
       languageConfig = "en";

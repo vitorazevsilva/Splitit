@@ -68,7 +68,9 @@ const setConfig = async (key, value) => {
     key === "themeConfig" ||
     key === "languageConfig"
   )
-    return await AsyncStorage.setItem(key, value).then(() => true);
+    return value !== null
+      ? await AsyncStorage.setItem(key, value).then(() => true)
+      : false;
   else return false;
 };
 

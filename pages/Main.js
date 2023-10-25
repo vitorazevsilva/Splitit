@@ -6,7 +6,7 @@ import Settings from "./Settings";
 
 export default ({ Gets, Sets }) => {
   const [ThemeStyle] = Gets;
-  const [Page, setPage] = useState("settings");
+  const [Page, setPage] = useState("friends");
 
   const isPage = (page) => {
     return Page === page;
